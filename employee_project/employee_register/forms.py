@@ -1,18 +1,18 @@
 from django import forms
-from .models import Employee
+from .models import student
 
-
-class EmployeeForm(forms.ModelForm):
+class studentform(forms.ModelForm):
 
     class Meta:
-        model = Employee
-        fields = ('fullname','mobile','emp_code','position')
-        labels = {
-            'fullname':'Full Name',
-            'emp_code':'EMP. Code'
+        model=student
+        fields= '__all__'
+        labels={
+            'firstname': 'First Name',
+            'lastname' : 'Last Name', 
+            'age': 'Age'
         }
 
-    def __init__(self, *args, **kwargs):
-        super(EmployeeForm,self).__init__(*args, **kwargs)
-        self.fields['position'].empty_label = "Select"
-        self.fields['emp_code'].required = False
+    def __init__(self,*args,**kwargs):
+        super(studentform,self).__init__(*args,**kwargs)
+        self.fields['department'].empty_label="select"
+        

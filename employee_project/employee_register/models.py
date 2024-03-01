@@ -2,15 +2,16 @@ from django.db import models
 
 # Create your models here.
 
-class Position(models.Model):
-    title = models.CharField(max_length=50)
+class department(models.Model):
+    title=models.CharField(max_length=50)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.title
 
-class Employee(models.Model):
-    fullname = models.CharField(max_length=100)
-    emp_code = models.CharField(max_length=3)
-    mobile= models.CharField(max_length=15)
-    position= models.ForeignKey(Position,on_delete=models.CASCADE)
+class student(models.Model):
+    firstname=models.CharField(max_length=50)
+    lastname=models.CharField(max_length=50)
+    age=models.CharField(max_length=3)
+    department=models.ForeignKey(department,on_delete=models.CASCADE)
+
     

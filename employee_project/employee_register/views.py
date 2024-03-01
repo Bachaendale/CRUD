@@ -1,35 +1,34 @@
 from django.shortcuts import render, redirect
-from .forms import EmployeeForm
-from .models import Employee
-
+from employee_register.forms import studentform
+from .models import student
 # Create your views here.
+def student_list(request):
+    context ={'student_list':student.objects.all()}
+    return render(request,'student_list.html', context)
 
-
-def employee_list(request):
-    context = {'employee_list': Employee.objects.all()}
-    return render(request, "employee_register/employee_list.html", context)
-
-
-def employee_form(request, id=0):
+def student_form(request, id=0):
     if request.method == "GET":
-        if id == 0:
-            form = EmployeeForm()
+        if id==0:
+           form = studentform
         else:
-            employee = Employee.objects.get(pk=id)
-            form = EmployeeForm(instance=employee)
-        return render(request, "employee_register/employee_form.html", {'form': form})
+           Student= student.objects.get(pk=id)
+           form= studentform(instance=Student)
+        return render(request,'student_form.html', {'form': form})
     else:
         if id == 0:
-            form = EmployeeForm(request.POST)
+           form= studentform(request.POST)
         else:
-            employee = Employee.objects.get(pk=id)
-            form = EmployeeForm(request.POST,instance= employee)
+           Student= student.objects.get(pk=id)
+           form= studentform(request.POST,instance=Student)
         if form.is_valid():
             form.save()
-        return redirect('/employee/list')
+        return redirect('/list')
 
 
-def employee_delete(request,id):
-    employee = Employee.objects.get(pk=id)
-    employee.delete()
-    return redirect('/employee/list')
+def student_delete(request,id):
+    students = student.objects.get(pk=id)
+    students.delete()
+    return redirect('/list')
+
+
+    return 
